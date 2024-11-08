@@ -14,16 +14,15 @@ class AddProductSerializer(serializers.ModelSerializer):
         product = Product(user = user, **validated_data)
         product.save()
         admin = User.objects.filter(role=UserRole.ADMIN.value).first()
-        user_instance = User.objects.get(id=admin.id)
         if admin:
             # Gửi thông báo cho Admin
             NotificationService.notify_new_product(
-                user_id=user.id,  # Người tạo sản phẩm (Shop)
-                product_id=product.id,  # ID sản phẩm mới tạo
-                product_name=product.name,  # Tên sản phẩm
-                price=product.price,  # Giá sản phẩm
-                device_token=admin.device_token,  # Token của admin
-                recipient=user_instance  # Người nhận thông báo là admin
+                user_id=user,
+                product_id=product.id,
+                product_name=product.name,
+                price=product.price,
+                device_token=admin.device_token,
+                recipient=admin
             )
         return product
 
