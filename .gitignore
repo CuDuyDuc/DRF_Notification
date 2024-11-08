@@ -1,0 +1,4 @@
+.env
+.venv
+.idea
+.notification-firebase-adminsdk.json

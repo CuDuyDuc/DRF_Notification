@@ -1,0 +1,1 @@
+from notification_be.apps.serializers_container import *
